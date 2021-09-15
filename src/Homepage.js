@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import ProductItem from "./ProductItem";
+import ProductItem from "./Product/ProductItem";
+import { Cart, ShowCart } from "./Cart/Cart";
+import CartIcon from "./assets/icons8-shopping-cart-24.png"
+import CartContext, { CartContextProvider } from "./Cart/CartContext";
 
 const Homepage = () => {
 
@@ -11,6 +14,9 @@ const Homepage = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [isProductLoading, setIsProductLoadng] = useState(false)
+
+    const {cartData, setCartData } = useContext(CartContext)
+    const value = {cartData, setCartData}
 
     useEffect(() => {
 
@@ -25,7 +31,6 @@ const Homepage = () => {
                 tempData.push(<button className = "categoryItem" onClick = {filterWithCategory} key = {index}>{capitalize(item)}</button>)
             })
             setCategoryData(tempData);
-
             setIsLoading(false);
         })()
 
@@ -69,6 +74,12 @@ const Homepage = () => {
             : (
                 <div className = "homepage">
                     <h1 style = {{textAlign:"center"}}>This, That and Everything Else.</h1>
+                    <div className = "productPage-cart">
+                        <span id = "cartBtn" className = "cartBtn" onClick = {() => ShowCart("homepage")} ><img alt = "Cart Icon" src={CartIcon}/></span>
+                        <CartContextProvider value = {value}>
+                            <Cart />
+                        </CartContextProvider>
+                    </div>
                     <div className = "categories">
                         <h2> Categories </h2>
                         {categoryData.map(function(item){
