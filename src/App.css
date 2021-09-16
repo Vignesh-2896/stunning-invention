@@ -134,6 +134,7 @@ a {
     z-index: 1;
     transition: 0.8s;
     text-align: center;
+    background-color: aliceblue;
     }
   
   .closeBtn {
@@ -159,3 +160,40 @@ a {
     width: 45%;
     margin:5px;
 }
+
+.SideMenu {
+    position: fixed;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 0%;
+    overflow-x: hidden;
+    z-index: 1;
+    transition: 0.8s;
+    background-color: aliceblue;
+  }
+  
+  .SideMenu li {
+    list-style-type: none;
+    margin:10px;
+    padding:5px;
+    display: block;
+    font-size:22px;
+    transition: 0.5s;
+    border-radius: 10px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .SideMenu ul {
+    padding:5px;
+  }
+
+  .sideMenuBtn {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .sideMenuBtn img {
+    margin-top: -120px;
+  }

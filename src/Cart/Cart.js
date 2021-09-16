@@ -6,9 +6,11 @@ const Cart = (props) => {
     
     const {cartData, setCartData} = useContext(CartContext);
     const [totalPrice, setTotalPrice] = useState(0)
+    const [totalQuantity, setTotalQuantity] = useState(0)
 
     useEffect(() => {
         updatePrice();
+        updateTotalQuantity();
     },[cartData])
 
     let updateQuantity = (arithmeticSymbol, ID) => {
@@ -25,6 +27,14 @@ const Cart = (props) => {
         })
         setCartData(tempData)
         updatePrice();
+    }
+
+    let updateTotalQuantity = () => {
+        let tempQuantity = 0;
+        cartData.forEach(function(item){
+            tempQuantity += parseInt(item["quantity"]);
+        })
+        setTotalQuantity(tempQuantity)
     }
 
     let updatePrice = () => {
@@ -47,8 +57,7 @@ const Cart = (props) => {
             {cartData.length > 0
             ? (
             <div> 
-                <h3>Total</h3>
-                <h3>$ {totalPrice}</h3>
+                <h2 style = {{textAlign:"left",marginLeft:"40px"}}>Total : ${totalPrice} , {totalQuantity} item(s). </h2>
             </div>)
             : (
                 <div>

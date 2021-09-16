@@ -2,10 +2,16 @@ import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import ProductItem from "./Product/ProductItem";
-import { Cart, ShowCart } from "./Cart/Cart";
-import CartIcon from "./assets/icons8-shopping-cart-24.png"
-import CartContext, { CartContextProvider } from "./Cart/CartContext";
+
+import ProductItem from "../Product/ProductItem";
+
+import { Cart, ShowCart } from "../Cart/Cart";
+import CartContext, { CartContextProvider } from "../Cart/CartContext";
+
+import { SideMenu, ShowMenu } from "./SideMenu";
+
+import CartIcon from "../assets/icons8-shopping-cart-24.png"
+import HamburgerIcon from "../assets/icons8-menu-48.png"
 
 const Homepage = () => {
 
@@ -13,7 +19,7 @@ const Homepage = () => {
     const [categoryData, setCategoryData] = useState([]);
 
     const [isLoading, setIsLoading] = useState(true);
-    const [isProductLoading, setIsProductLoadng] = useState(false)
+    const [isProductLoading, setIsProductLoading] = useState(false)
 
     const {cartData, setCartData } = useContext(CartContext)
     const value = {cartData, setCartData}
@@ -30,12 +36,28 @@ const Homepage = () => {
             response.forEach(function(item,index){
                 tempData.push(<button className = "categoryItem" onClick = {filterWithCategory} key = {index}>{capitalize(item)}</button>)
             })
+            tempData.push(<button className = "categoryItem" key = "Clear_Category" onClick = {clearCategory} >Clear</button>)
             setCategoryData(tempData);
             setIsLoading(false);
         })()
 
     },[])
 
+
+    const clearCategory = async() => {
+
+        setIsProductLoading(true);
+        setProductData([])
+
+        let elementList = document.getElementsByClassName("categoryItem")
+        for(let item of elementList) item.classList.remove("active")
+
+
+        let response = await fetchProducts();
+        updateProductData(response);
+        setIsProductLoading(false);
+
+    }
 
     const updateProductData = (tempProductData) => {
         let tempData = [];
@@ -58,13 +80,13 @@ const Homepage = () => {
         e.target.className += " active";
 
         setProductData([])
-        setIsProductLoadng(true);
+        setIsProductLoading(true);
 
         let requiredCategory = (e.target.innerHTML).toLowerCase();
 
         let response = await fetchProducts(requiredCategory)
         updateProductData(response)
-        setIsProductLoadng(false);
+        setIsProductLoading(false);
     }
 
     return (
@@ -75,6 +97,8 @@ const Homepage = () => {
                 <div className = "homepage">
                     <h1 style = {{textAlign:"center"}}>This, That and Everything Else.</h1>
                     <div className = "productPage-cart">
+                        <span id = "sideMenuBtn" className = "sideMenuBtn" onClick = {() => ShowMenu("homepage")} ><img alt = "HamburgerIcon" src={HamburgerIcon}/></span>
+                        <SideMenu />
                         <span id = "cartBtn" className = "cartBtn" onClick = {() => ShowCart("homepage")} ><img alt = "Cart Icon" src={CartIcon}/></span>
                         <CartContextProvider value = {value}>
                             <Cart />

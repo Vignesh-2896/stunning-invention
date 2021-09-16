@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
+
+import CartContext from "../Cart/CartContext";
+import { Cart, ShowCart } from "../Cart/Cart";
+
+import { SideMenu, ShowMenu } from "../Components/SideMenu";
+
+import HamburgerIcon from "../assets/icons8-menu-48.png"
 import Star from "../assets/icons8-star-48-2.png";
 import NoStar from "../assets/icons8-star-48.png";
 import CartIcon from "../assets/icons8-shopping-cart-24.png"
-import { Link } from "react-router-dom";
-import CartContext from "../Cart/CartContext";
-import { Cart, ShowCart } from "../Cart/Cart";
 
 const ProductPage = (props) => {
 
@@ -16,16 +20,32 @@ const ProductPage = (props) => {
 
     const addToCart = () => {
 
-        let cartData = {};
-        cartData["id"] = productData.id;
-        cartData["title"] = productData.title;
-        cartData["image"] = productData.image;
-        cartData["price"] = productData.price;
-        cartData["quantity"] = document.getElementById("productPage-quantity").value;
+        let newCartItemValidity = checkValidItem(productData.id)
+
+        if(newCartItemValidity === false){
+            let cartData = {};
+            cartData["id"] = productData.id;
+            cartData["title"] = productData.title;
+            cartData["image"] = productData.image;
+            cartData["price"] = productData.price;
+            cartData["quantity"] = document.getElementById("productPage-quantity").value;
+            
+            setCartData(arr => [...arr, cartData])
+            ShowCart();
+        } else {
+            alert("Oops ! You have already added this product in your cart.")
+            ShowCart();
+        }
         
-        setCartData(arr => [...arr, cartData])
-        ShowCart();
+    }
+
+    let checkValidItem  = (productID) => {
         
+        let productFound = false;
+        cartData.forEach(function(item){
+            if(item["id"] === productID)productFound = true;
+        });
+        return productFound;
     }
 
     let updateQuantity = (arithmeticSymbol) => {
@@ -48,9 +68,10 @@ const ProductPage = (props) => {
 
     return (
         <div className = "productPage">
-            <h2>Product Pageee</h2>
-            <Link to = "/">Homepage</Link>
+            <h1 style = {{textAlign:"center"}}>This, That and Everything Else.</h1>
             <div className = "productPage-cart">
+                <span id = "sideMenuBtn" className = "sideMenuBtn" onClick = {ShowMenu} ><img alt = "HamburgerIcon" src={HamburgerIcon}/></span>
+                <SideMenu />
                 <span id = "cartBtn" className = "cartBtn" onClick = {ShowCart} ><img alt = "Cart Icon" src={CartIcon}/></span>
                 <CartContext.Provider value = {value}>
                     <Cart />
