@@ -70,8 +70,8 @@ const Homepage = () => {
           key={item.id}
           to={{
             pathname: `products/${item.id}`,
-            state: { itemData: { item } },
           }}
+          state={ item }
         >
           <ProductItem itemData={item} />
         </Link>

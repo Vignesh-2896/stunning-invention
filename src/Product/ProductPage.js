@@ -6,10 +6,10 @@ import HamburgerIcon from "../assets/icons8-menu-48.png";
 import Star from "../assets/icons8-star-48-2.png";
 import NoStar from "../assets/icons8-star-48.png";
 import CartIcon from "../assets/icons8-shopping-cart-24.png";
-import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
-const ProductPage = (props) => {
-  let productData = props.location.state.itemData.item;
+const ProductPage = () => {
+  let { state : productData } = useLocation();
   let starData = displayStar(Math.floor(productData.rating.rate));
 
   const { cartData, setCartData } = useContext(CartContext);
@@ -137,10 +137,6 @@ const displayStar = (ratingNumber) => {
       <img key={`nostar_${i}`} alt="Rating without Star" src={NoStar} />
     );
   return tempData;
-};
-
-ProductPage.propTypes = {
-  location: PropTypes.object,
 };
 
 export default ProductPage;
