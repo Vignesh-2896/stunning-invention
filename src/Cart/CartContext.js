@@ -1,11 +1,11 @@
 import React from "react";
 
 const CartContext = React.createContext({
-    cartItem : [],
-    setCartItem : () => {}
-})
+  cartItem: [],
+  setCartItem: () => {},
+});
 
 export const CartContextProvider = CartContext.Provider;
-export const CartContextConsumer = CartContext.Consumer; 
+export const CartContextConsumer = CartContext.Consumer;
 
 export default CartContext;
