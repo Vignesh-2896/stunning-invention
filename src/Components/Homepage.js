@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProductItem from "../Product/ProductItem";
 import { Cart, ShowCart } from "../Cart/Cart";
-import CartContext, { CartContextProvider } from "../Cart/CartContext";
 import { SideMenu, ShowMenu } from "./SideMenu";
 import CartIcon from "../assets/icons8-shopping-cart-24.png";
 import HamburgerIcon from "../assets/icons8-menu-48.png";
@@ -11,12 +10,8 @@ import { InfinitySpin } from "react-loader-spinner";
 const Homepage = () => {
   const [productData, setProductData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
-
   const [isLoading, setIsLoading] = useState(true);
   const [isProductLoading, setIsProductLoading] = useState(false);
-
-  const { cartData, setCartData } = useContext(CartContext);
-  const value = { cartData, setCartData };
 
   useEffect(() => {
     (async () => {
@@ -71,7 +66,7 @@ const Homepage = () => {
           to={{
             pathname: `products/${item.id}`,
           }}
-          state={ item }
+          state={item}
         >
           <ProductItem itemData={item} />
         </Link>
@@ -125,9 +120,7 @@ const Homepage = () => {
             >
               <img alt="Cart Icon" src={CartIcon} />
             </span>
-            <CartContextProvider value={value}>
-              <Cart />
-            </CartContextProvider>
+            <Cart />
           </div>
           <div className="categories">
             <h2> Categories </h2>

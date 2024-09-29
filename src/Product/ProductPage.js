@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import CartContext from "../Cart/CartContext";
+import React from "react";
 import { Cart, ShowCart } from "../Cart/Cart";
 import { SideMenu, ShowMenu } from "../Components/SideMenu";
 import HamburgerIcon from "../assets/icons8-menu-48.png";
@@ -7,28 +6,29 @@ import Star from "../assets/icons8-star-48-2.png";
 import NoStar from "../assets/icons8-star-48.png";
 import CartIcon from "../assets/icons8-shopping-cart-24.png";
 import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { SetCartData } from "../redux/action";
 
 const ProductPage = () => {
-  let { state : productData } = useLocation();
+  const dispatch = useDispatch();
+  const { cartData } = useSelector((state) => state.cart);
+  let { state: productData } = useLocation();
   let starData = displayStar(Math.floor(productData.rating.rate));
-
-  const { cartData, setCartData } = useContext(CartContext);
-  const value = { cartData, setCartData };
 
   const addToCart = () => {
     let newCartItemValidity = checkValidItem(productData.id);
 
     if (newCartItemValidity === false) {
-      let cartData = {};
-      cartData["id"] = productData.id;
-      cartData["title"] = productData.title;
-      cartData["image"] = productData.image;
-      cartData["price"] = productData.price;
-      cartData["quantity"] = document.getElementById(
-        "productPage-quantity"
-      ).value;
-
-      setCartData((arr) => [...arr, cartData]);
+      let tempCart = [...cartData];
+      let newCartItem = {
+        id: productData.id,
+        title: productData.title,
+        image: productData.image,
+        price: productData.price,
+        quantity: document.getElementById("productPage-quantity").value,
+      };
+      tempCart.push(newCartItem);
+      dispatch(SetCartData([...tempCart]));
       ShowCart();
     } else {
       alert("Oops ! You have already added this product in your cart.");
@@ -80,9 +80,7 @@ const ProductPage = () => {
         <span id="cartBtn" className="cartBtn" onClick={ShowCart}>
           <img alt="Cart Icon" src={CartIcon} />
         </span>
-        <CartContext.Provider value={value}>
-          <Cart />
-        </CartContext.Provider>
+        <Cart />
       </div>
       <div className="productPage-main">
         <h3 style={{ textAlign: "center" }}>{productData.title}</h3>

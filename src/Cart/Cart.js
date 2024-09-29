@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import CartContext from "./CartContext";
+import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
+import { useSelector, useDispatch } from "react-redux";
+import { SetCartData } from "../redux/action";
 
 const Cart = (props) => {
-  const { cartData, setCartData } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const { cartData } = useSelector((state) => state.cart);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
@@ -13,7 +15,7 @@ const Cart = (props) => {
   }, [cartData]);
 
   let updateQuantity = (arithmeticSymbol, ID) => {
-    let tempData = cartData;
+    let tempData = [...cartData];
     tempData.forEach(function (item, index, object) {
       if (item["id"] === ID) {
         if (arithmeticSymbol === "+")
@@ -24,7 +26,7 @@ const Cart = (props) => {
         }
       }
     });
-    setCartData(tempData);
+    dispatch(SetCartData([...tempData]));
     updatePrice();
   };
 

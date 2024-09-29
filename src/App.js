@@ -1,20 +1,18 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Homepage from "./Components/Homepage";
 import ProductPage from "./Product/ProductPage";
-import { CartContextProvider } from "./Cart/CartContext";
+import store from "./store";
+import { Provider } from "react-redux";
 
 const App = () => {
-  const [cartData, setCartData] = useState([]);
-  const value = { cartData, setCartData };
-
   return (
-    <CartContextProvider value={value}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <Provider store={store}>
+      <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={Homepage} />
-          <Route exact path="/products/:productID" element={ProductPage} />
+          <Route path="/" element={<Homepage />} />
+          <Route path="/products/:productID" element={<ProductPage />} />
           <Route
             path="/products"
             errorElement={
@@ -26,7 +24,7 @@ const App = () => {
           ></Route>
         </Routes>
       </BrowserRouter>
-    </CartContextProvider>
+    </Provider>
   );
 };
 
