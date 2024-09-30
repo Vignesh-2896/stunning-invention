@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/stunning-invention/static/css/main.8da57223.css",
-    "main.js": "/stunning-invention/static/js/main.bc381068.js",
+    "main.js": "/stunning-invention/static/js/main.e5fe3530.js",
     "index.html": "/stunning-invention/index.html",
     "main.8da57223.css.map": "/stunning-invention/static/css/main.8da57223.css.map",
-    "main.bc381068.js.map": "/stunning-invention/static/js/main.bc381068.js.map"
+    "main.e5fe3530.js.map": "/stunning-invention/static/js/main.e5fe3530.js.map"
   },
   "entrypoints": [
     "static/css/main.8da57223.css",
-    "static/js/main.bc381068.js"
+    "static/js/main.e5fe3530.js"
   ]
 }
