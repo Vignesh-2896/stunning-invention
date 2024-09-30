@@ -19,7 +19,7 @@ const ProductPage = () => {
     let newCartItemValidity = checkValidItem(productData.id);
 
     if (newCartItemValidity === false) {
-      let tempCart = [...cartData];
+      let tempCart = JSON.parse(JSON.stringify(cartData));
       let newCartItem = {
         id: productData.id,
         title: productData.title,

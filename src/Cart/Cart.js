@@ -15,7 +15,7 @@ const Cart = (props) => {
   }, [cartData]);
 
   let updateQuantity = (arithmeticSymbol, ID) => {
-    let tempData = [...cartData];
+    let tempData = JSON.parse(JSON.stringify(cartData));
     tempData.forEach(function (item, index, object) {
       if (item["id"] === ID) {
         if (arithmeticSymbol === "+")
