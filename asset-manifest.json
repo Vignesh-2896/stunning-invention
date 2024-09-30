@@ -1,20 +1,13 @@
 {
   "files": {
-    "main.css": "/stunning-invention/static/css/main.a74543fe.chunk.css",
-    "main.js": "/stunning-invention/static/js/main.1878541a.chunk.js",
-    "main.js.map": "/stunning-invention/static/js/main.1878541a.chunk.js.map",
-    "runtime-main.js": "/stunning-invention/static/js/runtime-main.995586cc.js",
-    "runtime-main.js.map": "/stunning-invention/static/js/runtime-main.995586cc.js.map",
-    "static/js/2.8a58a44a.chunk.js": "/stunning-invention/static/js/2.8a58a44a.chunk.js",
-    "static/js/2.8a58a44a.chunk.js.map": "/stunning-invention/static/js/2.8a58a44a.chunk.js.map",
+    "main.css": "/stunning-invention/static/css/main.8da57223.css",
+    "main.js": "/stunning-invention/static/js/main.bc381068.js",
     "index.html": "/stunning-invention/index.html",
-    "static/css/main.a74543fe.chunk.css.map": "/stunning-invention/static/css/main.a74543fe.chunk.css.map",
-    "static/js/2.8a58a44a.chunk.js.LICENSE.txt": "/stunning-invention/static/js/2.8a58a44a.chunk.js.LICENSE.txt"
+    "main.8da57223.css.map": "/stunning-invention/static/css/main.8da57223.css.map",
+    "main.bc381068.js.map": "/stunning-invention/static/js/main.bc381068.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.995586cc.js",
-    "static/js/2.8a58a44a.chunk.js",
-    "static/css/main.a74543fe.chunk.css",
-    "static/js/main.1878541a.chunk.js"
+    "static/css/main.8da57223.css",
+    "static/js/main.bc381068.js"
   ]
 }
