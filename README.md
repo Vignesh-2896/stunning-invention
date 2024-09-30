@@ -20,7 +20,7 @@ Validation is present to halt the addition of items to cart which are already pr
 
 ## Built Using
 1. React Hooks, React-Router-Dom and React-Loader-Spinner
-2. React-Rexu
+2. React-Redux
 3. [Fake Store API](https://fakestoreapi.com)
 4. [Single Page Apps for Github Pages](https://github.com/rafgraph/spa-github-pages)
 
